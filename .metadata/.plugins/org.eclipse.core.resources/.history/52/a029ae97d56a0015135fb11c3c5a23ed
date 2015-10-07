@@ -1,0 +1,65 @@
+package usernametoname;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+public class usernametoname {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String Name= "";
+		
+		console.writeLine("enter username");
+		String user=console.readLine();
+		
+		console.writeLine("looking up name");
+		try{			
+		Name = getPersonName(user);  	    
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		console.writeLine("user name: "+user+"\nmaps to: "+Name);
+	}
+
+	private static String getPersonName(String user) throws IOException {
+		Document doc = Jsoup.connect("http://www.ecs.soton.ac.uk/people/"+user).get();
+		Elements newsHeadlines = doc.select("title");
+		String Name=newsHeadlines.first().ownText().split(" \\|")[0];
+		return (Name.equals("ECS People"))? "Name not found" : Name;
+	}
+	
+
+}
+
+class console{
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static boolean writeLine(Object item){
+        try{
+            System.out.println(item.toString());
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    public static String readLine(){
+        try{
+            return console.br.readLine();
+            }
+        catch(Exception e){
+            return null;
+        }
+    }
+}
+    
+

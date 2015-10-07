@@ -1,0 +1,40 @@
+package usernametoname;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+public class usernametoname {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("test");
+		try{
+			String user="demjj";
+		String Name = getPersonName(user);  
+	    print(Name);
+	    print("end");
+		}
+		catch(Exception e)
+		{
+			print(e);
+		}
+	}
+
+	private static String getPersonName(String user) throws IOException {
+		Document doc = Jsoup.connect("http://www.ecs.soton.ac.uk/people/"+user).get();
+		Elements newsHeadlines = doc.select("title");
+		String Name=newsHeadlines.first().ownText().split("\\|")[0];
+		return (Name.equals("ECS People"))? "Name not found" : Name;
+	}
+	
+	public static void print(Object x){
+		System.out.println(x);
+	}
+
+}

@@ -1,0 +1,32 @@
+package usernametoname;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+public class usernametoname {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("test");
+		try{
+			String user="dem";
+		Document doc = Jsoup.connect("http://www.ecs.soton.ac.uk/people/"+user).get();
+		Elements newsHeadlines = doc.select("title");
+		String Name=newsHeadlines.first().ownText().substring('|',0);
+	    print(Name);
+	    print("end");
+		}
+		catch(Exception e)
+		{
+			print(e);
+		}
+	}
+	public static void print(Object x){
+		System.out.println(x);
+	}
+
+}

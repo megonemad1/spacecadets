@@ -1,0 +1,33 @@
+package watij;
+
+import org.w3c.dom.Element;
+import watij.elements.HtmlElements;
+import watij.finders.DecendantFinder;
+import watij.finders.Finder;
+import watij.finders.XPathFinder;
+import watij.utilities.Debug;
+
+import java.util.List;
+
+public abstract class BaseContainer extends BaseHtmlFinder implements Container {
+
+    public List<Element> elements() throws Exception {
+        Debug.getInstance().println("Begin BaseContainer.elements()");
+        List<Element> list = new DecendantFinder().find(element());
+        Debug.getInstance().println("End BaseContainer.elements()");
+        return list;
+    }
+
+    public HtmlElements htmlElements(Finder... finder) throws Exception {
+        return find(element(),finder);
+    }
+
+    public HtmlElements decendants() throws Exception {
+        return htmlElements(new DecendantFinder());
+    }
+
+    public HtmlElements xpath(String expression) throws Exception {
+        return htmlElements(new XPathFinder(expression));
+    }
+
+}

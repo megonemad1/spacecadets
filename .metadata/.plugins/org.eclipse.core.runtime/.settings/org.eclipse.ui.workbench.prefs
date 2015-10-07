@@ -1,0 +1,4 @@
+ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.debug.ui.presentation
+ColorsAndFontsPreferencePage.selectedElement=Forg.eclipse.debug.ui.consoleFont
+eclipse.preferences.version=1
+org.eclipse.debug.ui.consoleFont=1|Monospace|5.0|0|GTK|1|;
